@@ -51,7 +51,7 @@ session_start();
             <div class="bottom_header_box">
             
             <div class="newapp">
-            <form id="addappl" method="post" action="apps.php" onsubmit="return emptySearch()">
+            <form id="addappl" method="post" action="index.php" onsubmit="return emptySearch()">
                 <label>Add a new app name here : </label>
             <input id="apps" placeholder="Add a new app" type="text" value="" name="apps">
                                       
@@ -70,17 +70,51 @@ session_start();
                                   {
                                       $search = $_GET['SearchName'];
                                       
-                                     
-                                      $quer = mysql_query("SELECT apps FROM application WHERE apps LIKE '$search%' ORDER BY apps ");
                                       
-                                     
-                                   
-                                      while($row1=  mysql_fetch_array($quer))
-                                      {
-                                          echo $row1['apps']."<br>";
-                                      }
-                                      
+                                      if($search == NULL)
                                           
+                                        {
+                                          echo "Please enter a text to search.";
+                                        }
+                                      
+                                        else 
+                                        
+                                            if($search != NULL)
+                                                
+                                                
+                                                {
+                                                    $quer = mysql_query("SELECT apps FROM application WHERE apps LIKE '$search%' ORDER BY apps ");
+                                      
+                                                    
+                                                        if(mysql_num_rows($quer)>0)
+                                                            {
+                                                                    while($row1=  mysql_fetch_array($quer))
+                                                                {
+                                                                       
+                                                                    
+                                                                     
+                                                                      
+                                                                             echo $row1['apps']."<br>";
+                                                                           
+                                                                          
+                                                                     
+    
+                                                                 
+                                                            
+                                                                }
+                                                                
+                                                        
+                                                              }
+                                                              
+                                                                else 
+                                                                    {
+                                                                    echo"No application is available.";
+                                                                    }
+                                                
+                                                   
+                                                }
+                                   
+                                    
                                   }
                                                 
 					
